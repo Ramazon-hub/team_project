@@ -13,7 +13,7 @@ const USER_REGISTER =  `
         user_email, user_password
     ) values (
         $1, $2, $3, $4, $5
-    ) returning user_avatar, user_fname, user_lname, user_email
+    ) returning user_uid, user_avatar, user_fname, user_lname, user_email, user_date
 `
 
 const USER_LOGIN =  `
