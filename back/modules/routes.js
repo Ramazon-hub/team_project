@@ -2,8 +2,10 @@ const express = require('express')
 const router = express.Router()
 const register = require('./Users/router')
 const comments = require('./Comments/router')
-const posts = require('./Posts/router')
+const postsRoute = require('./Posts/router')
+const commentsRoute =require('./Comments/router')
 
-router.use('/',posts)
+router.use('/',postsRoute)
+router.use('/',commentsRoute)
 
 module.exports=router

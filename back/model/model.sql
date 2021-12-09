@@ -8,7 +8,7 @@ create table users(
     user_fname text not null,
     user_lname text not null,
     user_email text not null unique,
-    user_password text not null unique ,
+    user_password text not null,
     user_date timestamp with time zone not null default current_timestamp,
     is_admin boolean default false
 );
