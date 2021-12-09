@@ -23,9 +23,9 @@ module.exports = {
       const file = req.file;
       const updatePost = await model.updatePost(postTitle, postImg, postId);
       if (updatePost) {
-        res.status(200).send(updatePost);
+        res.status(200).json(updatePost);
       } else {
-        res.status(400).send("Invalid values ...");
+        res.status(400).json({ message: "Not Update" });
       }
     } catch (err) {
       console.log(err);
@@ -36,9 +36,21 @@ module.exports = {
       const { postId } = req.body;
       const deletePost = await model.deletePost(postId);
       if (deletePost) {
-        res.status(200).send(deletePost);
+        res.status(200).json(deletePost);
       } else {
-        res.status(200).send("Invalid values ...");
+        res.status(200).json({ meassage: "Not delete" });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  GET: async (_, res) => {
+    try {
+      const allPosts = await model.allPosts();
+      if (allPosts) {
+        res.status(200).json(allPosts);
+      } else {
+        res.status(400).json({ message: "No posts" });
       }
     } catch (err) {
       console.log(err);
