@@ -5,5 +5,6 @@ const comments = require('./Comments/router')
 const posts = require('./Posts/router')
 
 router.use('/',posts)
+router.use('/',register)
 
 module.exports=router
