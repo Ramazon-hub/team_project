@@ -8,7 +8,7 @@ function Home() {
         <>
             <Header />
             <Main>
-                Home
+                Home1
             </Main>
         </>
     )
