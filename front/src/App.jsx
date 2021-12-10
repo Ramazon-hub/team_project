@@ -12,6 +12,7 @@ import Public from "./Routes/Public";
 import Private from "./Routes/Private";
 
 function App() {
+  console.log('hello');
   return (
     <div className="App">
       <Switch>
