@@ -1,17 +1,22 @@
+.profile_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .profile_background {
-    width: 1260px;
-    height: 300px;
+    border: 1px solid #999;
+    width: 790px;
+    height: 200px;
     margin: 0 auto;
     padding: 20px;
-    background: url('https://picsum.photos/1260/300') no-repeat;
+    background: url('https://picsum.photos/800/300') no-repeat;
     background-size: cover;
 }
 .profile {
-    width: 1215px;
-    margin: 0 auto;
+    width: 830px;
     max-height: auto;
-    padding: 20px 40px;
-    border: 2px solid #999;
+    border: 1px solid #999;
     border-top: 2px solid #fff;
     position: relative;
 }
@@ -31,6 +36,7 @@
     margin-top: 8.5rem;
     display: flex;
     flex-direction: column;
+    padding: 2rem;
 }
 
 .profile_name {
