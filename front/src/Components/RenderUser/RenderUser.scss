@@ -1,0 +1,19 @@
+.item_link-profile {
+    display: flex;
+    align-items: center;
+    img {
+        border-radius: 50%;
+    }
+    &:hover {
+        h3 {
+            color: #FFF;
+        }
+    }
+}
+
+.profile-btn {
+    background-color: inherit;
+    border: none;
+    color: #00d;
+    font-size: 1.5rem;
+}

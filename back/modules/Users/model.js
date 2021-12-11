@@ -5,6 +5,22 @@ const USER_GET = `
         user_uid, user_avatar, user_fname,
         user_lname, user_email, user_date
     from users
+    offset $1 limit $2
+`
+
+const USER_GET_ALL = `
+    select 
+        user_uid, user_avatar, user_fname,
+        user_lname, user_email, user_date
+    from users
+`
+
+const USER_GET_PARAMS = `
+    select 
+        user_uid, user_avatar, user_fname,
+        user_lname, user_email, user_date
+    from users
+    where user_email = $1
 `
 
 const USER_REGISTER =  `
@@ -25,7 +41,9 @@ const USER_LOGIN =  `
         user_email = $1 and user_password = $2
 `
 
-const users = () => fetchAll(USER_GET)
+const users = (page, limit) => fetchAll(USER_GET, page, limit)
+const usersALL = () => fetchAll(USER_GET_ALL)
+const usersParams = (params) => fetchAll(USER_GET_PARAMS, params)
 const userRegister = (user_avatar, user_fname, user_lname, user_email, user_password) => 
     fetch(USER_REGISTER, user_avatar, user_fname, user_lname, user_email, user_password);
 const userLogin = (user_email, user_password) => 
@@ -33,6 +51,8 @@ const userLogin = (user_email, user_password) =>
 
 module.exports = {
     users,
+    usersALL,
+    usersParams,
     userRegister,
     userLogin
 }
