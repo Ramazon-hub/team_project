@@ -49,3 +49,19 @@
     color: #aaa;
     font-size: 1.5rem;
 }
+.log-out-btn {
+    width: 100px;
+    display: block;
+    position: absolute;
+    right: 2rem;
+    background-color: #fff;
+    border-radius: 20px;
+    border: 1px solid #999;
+    padding: 15px;
+    font-size: 1.5rem;
+    color: #555;
+}
+
+.log-out-btn--active {
+    display: none;
+}

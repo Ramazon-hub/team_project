@@ -5,6 +5,7 @@ const { validate } = require('../../middlewares/jwt')
 const userModule = require('./user')
 
 router.get('/users', validate, userModule.GET)
+      .get('/user/:email', validate, userModule.USER)
       .get('/auth', validate, userModule.AUTH)
       .post('/signup', userModule.REGISTER)
       .post('/login', userModule.LOGIN)
