@@ -4,12 +4,13 @@ const register = require('./Users/router')
 const comments = require('./Comments/router')
 const postsRoute = require('./Posts/router')
 const commentsRoute =require('./Comments/router')
-
+const homeRoute = require('./Home/router')
 
 router.use('/',register)
 
 router.use('/',postsRoute)
 router.use('/',commentsRoute)
+router.use('/',homeRoute)
 
 
 module.exports=router
