@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken')
 
 function validate(req, res, next) 
 {
-    const bearerHeader = req.headers['authorization'];
-    
+    const bearerHeader = req.headers['authorization'] ? 
+    req.headers['authorization'] : req.body.authorization
     if (typeof bearerHeader !== 'undefined') {
         const bearer = bearerHeader.split(' ');
         const bearerToken = bearer[1];

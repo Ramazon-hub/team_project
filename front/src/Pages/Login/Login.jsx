@@ -28,7 +28,7 @@ function Login() {
                     <input type="email" id='Email' className='input' />
                     <label htmlFor="Password" className="form-label" >Password</label>                    
                     <input type="password" id='Password'  className='input' />
-                    <button type="submit" className='form-btn'>Login</button>
+                    <button type="submit" className='form-btn btn'>Login</button>
                     <small>If you don't have account visit <Link className="form-link" to='/signup'> Sign Up </Link> page</small>
                 </form>
             </div>

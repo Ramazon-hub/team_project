@@ -50,7 +50,7 @@ main {
 }
 
 .main-user-title {
-    color: #333;
+    color: #008dce;
     margin-left: 1rem;
 }
 
@@ -62,14 +62,10 @@ main {
 
 .item_link {
     width: 100%;
-    border: 1px solid #999;
+    border: 2px solid #008dce;
     padding: 1.5rem;
     border-radius: 2rem;
     font-size: 1.5rem;
-    color: #333;
+    color: #008dce;
     text-decoration: none;
-    &:hover {
-        color: #fff;
-        background-color: #999;
-    }
 }

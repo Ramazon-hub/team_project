@@ -22,6 +22,7 @@
 }
 
 .avatar {
+    background-color: #999;
     border-radius: 50%;
     border: 5px solid #fff;
     width: 150px;
@@ -56,12 +57,109 @@
     right: 2rem;
     background-color: #fff;
     border-radius: 20px;
-    border: 1px solid #999;
+    border: 2px solid #008dce;
     padding: 15px;
     font-size: 1.5rem;
     color: #555;
 }
 
 .log-out-btn--active {
+    display: none;
+}
+
+.upload-form-wrapper {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba($color: #000000, $alpha: .5);
+}
+
+.upload-form {
+    width: 800px;
+    height: 400px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    border-radius: 2rem;
+    box-shadow: 0px 10px 20px #000;
+}
+
+.img_wrapper {
+    width: 600px;
+    height: 100%;
+    border: 1px solid #999;
+    color: #999;
+}
+
+.form-sub-img {
+    width: 100%;
+}
+
+.input_wrapper {
+    width: 400px;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.file {
+    padding: 10px;
+}
+
+.file::-webkit-file-upload-button {
+    width: 110px;
+    border: 2px solid #008dce;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: #fff;
+    &:hover {
+        background-color: #008dce;
+        color: #fff;
+        border: 2px solid #fff;
+        box-shadow: 0px 0px 5px 2px #008dce;
+    }
+}
+
+.form-sub-btn {
+    width: 110px;
+    padding: 1rem;
+    border: 2px solid #008dce;
+    border-radius: 1rem;
+    background-color: #fff;
+    &:hover {
+        background-color: #008dce;
+        color: #fff;
+        border: 2px solid #fff;
+        box-shadow: 0px 0px 5px 2px #008dce;
+    }
+}
+
+.camera {
+    width: 45px;
+    height: 45px;
+    border: 2px solid #008dce;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.camera--active {
     display: none;
 }

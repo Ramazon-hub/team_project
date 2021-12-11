@@ -30,7 +30,7 @@
 
 .form-link {
     font-size: 1.5rem;
-    color: #00a;
+    color: #008dce;
 }
 .form-label {
     color: #aaa;
@@ -39,19 +39,20 @@
 .input {
     margin: 10px 0;
     padding: 10px;
-    border: 2px solid #999;
+    border: 2px solid #008dce;
     border-radius: 10px;
     background-color: #fff;
 }
 
 .form-btn {
+    color: #008dce;
     background-color: #fff;
-    border: 2px solid #999;
+    border: 2px solid #008dce;
     border-radius: 10px;
     margin: 10px 0;
     padding: 10px;
     &:hover {
         color: #fff;
-        background-color: #999;
+        background-color: #008dce;
     }
 }

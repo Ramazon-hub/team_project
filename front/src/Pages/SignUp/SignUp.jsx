@@ -34,7 +34,7 @@ function SignUp() {
                     <input type="email" className='input' id='Email' placeholder='Email' />
                     <label htmlFor="Password" className="form-label" >Password</label>
                     <input type="password" className='input' id='Password' placeholder='Password' />
-                    <button type="submit" className='form-btn'>Sign Up</button>
+                    <button type="submit" className='form-btn btn'>Sign Up</button>
                     <small>If you have account visit <Link className="form-link" to='/login'> Login </Link> page</small>
                 </form>
             </div>

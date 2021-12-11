@@ -1,22 +1,23 @@
 import { Link } from "react-router-dom";
-import useAuthUser from "../../Hooks/useAuthUser";
 import avatar from '../../Images/avatar.png'
 import './RenderUser.scss'
 
 function RenderUsers({ user, moreUser }) {
-    const authUser = useAuthUser()
-
-    const imgSrc = authUser.user_avatar ? 
-        (authUser.user_avatar.split('/').includes('upload') ? 
-        'http://localhost:4300/' + authUser.user_avatar : avatar) 
-        : avatar
+    
     return (
-        <ul className='main-user-list'>
+        <ul className='main-user-list reder-list'>            
+            <h2 className='main-rec-title'>Recommend for you</h2>
             {user.length ? user[0].map(u => {
+            let imgSrc = u.user_avatar ? 'http://localhost:4300/avatar/' + u.user_avatar : avatar
+            let styleFile = {
+                backgroundImage: `url(${imgSrc})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: "no-repeat"
+            }
             return (
-            <li className="main-item" key={u.user_uid}>
-                <Link className="item_link item_link-profile" to={'/profile/' + u.user_email}>
-                    <img className='logo-img' src={imgSrc} alt={imgSrc} />
+            <li className="main-item reder-item" key={u.user_uid}>
+                <Link className="item_link item_link-profile btn" to={'/profile/' + u.user_email}>
+                    <div className='logo-img' style={styleFile} />
                     <h3 className='main-user-title'>{u.user_email}</h3>
                 </Link>
             </li>

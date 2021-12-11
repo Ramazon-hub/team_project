@@ -1,5 +1,7 @@
 require('dotenv').config()
+const { rootFile } = require('../../config')
 const jwt = require('jsonwebtoken')
+const { v4: UUID } = require('uuid')
 const model = require('./model')
 
 module.exports = {
@@ -73,6 +75,30 @@ module.exports = {
             if (req.user && email) {
                 res.json(await model.usersParams(email))
             }
+        } catch (error) {
+            console.log(error);
+        }
+    }, 
+    AVATAR: async (req, res) => {
+        try {
+            const { mimetype, mv } = req.files.image
+
+            if (req.user && mimetype && mv) {
+                const name = UUID() + '.' + mimetype.split('/')[1]
+                await model.avatar(name, req.user.user_uid)
+                mv(rootFile + '/uploads/' + name, (_) => {})
+                res.redirect('http://localhost:3000/')
+            } else {
+                res.redirect('http://localhost:3000/')
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    AVATARGET: async (req, res) => {
+        try {
+            const { img } = req.params
+            res.sendFile(rootFile + '/uploads/' + img)
         } catch (error) {
             console.log(error);
         }

@@ -36,13 +36,12 @@ function Main({ children }) {
         <main>
             <div className="main_warpper">
                 <ul className='main-user-list'>
-                    <li className='main-item'><Link className='item_link' to='/'>Home</Link></li>
-                    <li className='main-item'><Link className='item_link' to={'/profile/' + userAuth.user_email} >Profile</Link></li>
+                    <li className='main-item'><Link className='item_link btn' to='/'>Home</Link></li>
+                    <li className='main-item'><Link className='item_link btn' to={'/profile/' + userAuth.user_email} >Profile</Link></li>
                 </ul>
             </div>
             {children}
             <div className="main_warpper">
-                <h2 className='main-rec-title'>Recommend for you</h2>
                 <RenderUsers user={user} moreUser={moreUser} />
             </div>
         </main>
