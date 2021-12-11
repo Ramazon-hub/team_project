@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
+import useAuth from "./useAuth";
 
-function useUser() {
-    const [ user, setUser ] = useState('')
-
+function useUser(params) {
+    const [ user, setUser ] = useState([])
+    const [ token ] = useAuth(true)
     useEffect(() => {
-        fetch('http://localhost:4300/users')
-        .then(res => res.json())
-        .then(data => {
-            setUser(data) 
-            typeof data.message !== 'undefined' ? console.log(data.message) :  console.log()
+        fetch(`http://localhost:4300/user/${params}`, {
+            headers: {
+                'authorization': `${token}`
+            }
         })
-        .catch(err => console.log(err))
-    }, [])
+        .then(res => res.json())
+        .then(data => setUser(data))
+    }, [token, params])
 
     return user
 }

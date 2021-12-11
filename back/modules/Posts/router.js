@@ -4,6 +4,7 @@ const {upload} = require('../../lib/multer')
 
 const PostsModule = require('./posts')
 
+router.get('/posts',PostsModule.GET)
 router.post("/posts",upload.single('postImg'),PostsModule.POST);
 router.put('/posts',upload.single('postImg'),PostsModule.PUT)
 router.delete('/posts',PostsModule.DELETE)

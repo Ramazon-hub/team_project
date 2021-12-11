@@ -15,13 +15,18 @@ const UPDATE_POST = `
             post_img =$2
         where post_uid = $3 returning *
 `;
+const ALL_POSTS = `
+      select * from posts;
+`;
+const allPosts = () => fetchAll(ALL_POSTS);
 const newPost = (postTitle, postImg, postRefUser) =>
   fetch(NEW_POST, postTitle, postImg, postRefUser);
 const updatePost = (postTitle, postImg, postId) =>
   fetch(UPDATE_POST, postTitle, postImg, postId);
-const deletePost = (postId) => fetch(DELETE_POST,postId);
+const deletePost = (postId) => fetch(DELETE_POST, postId);
 module.exports = {
+  allPosts,
   newPost,
   updatePost,
-  deletePost
+  deletePost,
 };
