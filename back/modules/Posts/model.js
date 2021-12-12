@@ -16,9 +16,25 @@ const UPDATE_POST = `
         where post_uid = $3 returning *
 `;
 const ALL_POSTS = `
-      select * from posts;
+      select 
+      post_uid, post_title, post_img, 
+      post_date, user_avatar, user_email
+      from posts
+      inner join users
+      on users.user_uid = posts.post_ref_user
 `;
+
+const USER_POST = `
+      select 
+      post_uid, post_title, post_img, 
+      post_date, user_avatar, user_email
+      from posts
+      inner join users
+      on users.user_uid = posts.post_ref_user
+      where user_uid = $1
+`
 const allPosts = () => fetchAll(ALL_POSTS);
+const userPost = (userId) => fetchAll(USER_POST, userId);
 const newPost = (postTitle, postImg, postRefUser) =>
   fetch(NEW_POST, postTitle, postImg, postRefUser);
 const updatePost = (postTitle, postImg, postId) =>
@@ -26,6 +42,7 @@ const updatePost = (postTitle, postImg, postId) =>
 const deletePost = (postId) => fetch(DELETE_POST, postId);
 module.exports = {
   allPosts,
+  userPost,
   newPost,
   updatePost,
   deletePost,

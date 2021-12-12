@@ -1,5 +1,6 @@
 import Header from '../../Components/Header/Header';
 import Main from '../../Components/Main/Main';
+import ReanderPosts from '../../Components/RenderPosts/ReanderPosts';
 import './Home.scss'
 
 function Home() {
@@ -7,10 +8,9 @@ function Home() {
         <>
             <Header />
             <Main>
-                <h1>Home1</h1>
-               <div>
-                   <h1>Ramazon</h1>
-               </div>
+                <div className="home">
+                    <ReanderPosts />
+                </div>
             </Main>
         </>
     )

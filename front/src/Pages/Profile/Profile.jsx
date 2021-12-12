@@ -8,6 +8,7 @@ import useUser from "../../Hooks/useUser";
 import { useParams } from 'react-router-dom'
 import useAuth from "../../Hooks/useAuth";
 import { useEffect, useState } from "react";
+import useUserPost from "../../Hooks/useUserPosts";
 
 function Profile() {
     const [ setToken ] = useAuth(false)
@@ -20,7 +21,7 @@ function Profile() {
     const [ cameraBtn, setCameraBtn ] = useState('camera')
     const [ modal, setModal ] = useState(false)
     const [ img, setImg ] = useState('')
-
+    const userPost = useUserPost(user.length ? user[0].user_uid : '')
     useEffect(() => {
         if (user.length && authUser) {
             const User = user.find(u => u.user_email === authUser.user_email)
@@ -34,7 +35,6 @@ function Profile() {
             setCameraBtn('camera')
         }
     }, [authUser, user, accessUser])
-
     const logOut = () => {
         if (typeof accessUser !== 'undefined') {
             setToken(false)
@@ -84,7 +84,7 @@ function Profile() {
                         </div>
                         {modal ? 
                             <div className="upload-form-wrapper" onClick={e => e.target.classList.value === 'upload-form-wrapper' ? setModal(false) : ''}>
-                                <form 
+                                <form
                                     action="http://localhost:4300/avatar"
                                     method="post"
                                     encType="multipart/form-data"
@@ -101,7 +101,28 @@ function Profile() {
                                 </form>
                             </div>
                         : ''}
+                        
                     </div>
+                    <ul className='post_list'>
+                        {userPost.length ?
+                        userPost.map(p => {
+                        let imgSrc = p.user_avatar ? 'http://localhost:4300/avatar/' + p.user_avatar : avatar
+                        let styleFile = {
+                        backgroundImage: `url(${imgSrc})`,
+                        backgroundSize: 'cover',
+                        backgroundRepeat: "no-repeat"
+                        }
+                        return (
+                        <li className='post_item' key={p.post_uid}>
+                            <h3 className='post_title'>{p.post_title}</h3>
+                            <img className='post_img' src={'http://localhost:4300/post/' + p.post_img} alt="img" />
+                            <div className="logo-img-post" style={styleFile} />
+                            <small className="post-date">{p.post_date}</small>
+                        </li>
+                        )
+                        })
+                        : []}
+                    </ul>
                 </div>
             </Main>
         </>

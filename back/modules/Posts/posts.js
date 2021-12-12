@@ -1,17 +1,19 @@
 const model = require("./model");
+const { v4: UUID } = require('uuid');
+const { rootFile } = require("../../config");
 
 module.exports = {
   POST: async (req, res) => {
     try {
-      const { postTitle, postImg, postRefUser } = req.body;
-      const file = req.file;
-      // const postImg = file.filename
-      console.log(postTitle, postImg, postRefUser);
-      const newPost = await model.newPost(postTitle, postImg, postRefUser);
-      if (newPost) {
-        res.status(200).json(newPost);
+      const { postTitle } = req.body;
+      const { mimetype, mv } = req.files.postImage
+      if ( mimetype && mv && req.user ) {
+          const name = UUID() + '.' + mimetype.split('/')[1]
+          await model.newPost(postTitle, name, req.user.user_uid)
+          mv(rootFile + '/uploads/' + name, (_) => {})
+          res.redirect('http://localhost:3000/')
       } else {
-        res.status(400).json({ message: "Invalid valeu" });
+        res.redirect('http://localhost:3000/')
       }
     } catch (err) {
       console.log(err);
@@ -44,10 +46,10 @@ module.exports = {
       console.log(err);
     }
   },
-  GET: async (_, res) => {
+  GET: async (req, res) => {
     try {
       const allPosts = await model.allPosts();
-      if (allPosts) {
+      if (allPosts && req.user) {
         res.status(200).json(allPosts);
       } else {
         res.status(400).json({ message: "No posts" });
@@ -56,4 +58,21 @@ module.exports = {
       console.log(err);
     }
   },
+  SINGLE_POST: async (req, res) => {
+      try {
+        const { img } = req.params
+        res.sendFile(rootFile + '/uploads/' + img)
+      } catch (error) {
+        console.log(error);
+      }
+  },
+  USER_POST: async (req, res) => {
+      try {
+        const { userId } = req.params
+        const user = await model.userPost(userId)
+        res.json(user)
+      } catch (error) {
+        console.log(error);
+      }
+  }
 };

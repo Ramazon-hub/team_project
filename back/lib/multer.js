@@ -20,6 +20,7 @@ const upload = multer({
   storage: storage,
   fileFilter: (req, file, cb) => {
     if (
+      
       file.mimetype.split("/")[0] === "image"
     //    ||
     //   file.mimetype.split("/")[0] === "video"

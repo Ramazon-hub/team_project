@@ -82,7 +82,6 @@ module.exports = {
     AVATAR: async (req, res) => {
         try {
             const { mimetype, mv } = req.files.image
-
             if (req.user && mimetype && mv) {
                 const name = UUID() + '.' + mimetype.split('/')[1]
                 await model.avatar(name, req.user.user_uid)
