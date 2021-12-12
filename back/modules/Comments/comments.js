@@ -50,6 +50,7 @@ module.exports = {
         commentRefPost,
         commentRefComment,
       } = req.body;
+      console.log(req.body);
       const replyComment = await model.commentComment(
         commentTitle,
         commentRefUser,

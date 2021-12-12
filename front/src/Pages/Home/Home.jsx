@@ -7,7 +7,10 @@ function Home() {
         <>
             <Header />
             <Main>
-                Home1
+                <h1>Home1</h1>
+               <div>
+                   <h1>Ramazon</h1>
+               </div>
             </Main>
         </>
     )

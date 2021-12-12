@@ -6,7 +6,7 @@ module.exports = {
       const { postTitle, postImg, postRefUser } = req.body;
       const file = req.file;
       // const postImg = file.filename
-
+      console.log(postTitle, postImg, postRefUser);
       const newPost = await model.newPost(postTitle, postImg, postRefUser);
       if (newPost) {
         res.status(200).json(newPost);
