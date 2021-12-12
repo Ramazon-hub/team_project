@@ -7,8 +7,8 @@ const PostsModule = require('./posts')
 router.get('/posts', validate, PostsModule.GET)
 router.get('/post/:img', PostsModule.SINGLE_POST)
 router.get('/postUser/:userId', validate, PostsModule.USER_POST)
+router.post('/updatePost', validate, PostsModule.PUT)
 router.post("/posts", validate, PostsModule.POST);
-router.put('/posts', validate, PostsModule.PUT)
 router.delete('/posts', validate,PostsModule.DELETE)
 
 module.exports = router;

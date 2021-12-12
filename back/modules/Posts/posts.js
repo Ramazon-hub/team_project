@@ -21,13 +21,19 @@ module.exports = {
   },
   PUT: async (req, res) => {
     try {
-      const { postTitle, postImg, postId } = req.body;
-      const file = req.file;
-      const updatePost = await model.updatePost(postTitle, postImg, postId);
-      if (updatePost) {
-        res.status(200).json(updatePost);
+      const { postTitle, postId } = req.body;
+      const user = await model.userPost(req.user.user_uid)
+      if ( req.files && user.length && postId ) {
+          const { mv, mimetype } = req.files.postImage
+          const name = UUID() + '.' + mimetype.split('/')[1]
+          await model.updatePost(postTitle, name, postId)
+          mv(rootFile + '/uploads/' + name, (_) => {})
+          res.redirect('http://localhost:3000/')
+      } else if (postTitle && user.length && postId) {
+          await model.updatePostTitle(postTitle, postId)
+          res.redirect('http://localhost:3000/')
       } else {
-        res.status(400).json({ message: "Not Update" });
+        res.redirect('http://localhost:3000/')
       }
     } catch (err) {
       console.log(err);
@@ -50,7 +56,7 @@ module.exports = {
   GET: async (req, res) => {
     try {
       const allPosts = await model.allPosts();
-      if (allPosts && req.user) {
+      if (allPosts && req.user.user_uid) {
         res.status(200).json(allPosts);
       } else {
         res.status(400).json({ message: "No posts" });

@@ -11,12 +11,12 @@ import { useParams } from 'react-router-dom'
 import useAuth from "../../Hooks/useAuth";
 import { useEffect, useState } from "react";
 import useUserPost from "../../Hooks/useUserPosts";
+import useEditDelete from "../../Hooks/useEditDelete";
 
 function Profile() {
     // Token
     const [ setToken ] = useAuth(false)
     const [ token ] = useAuth(true)
-
     // Class List Add
     const [ logOutBtn, setLogOutBtn ] = useState('log-out-btn')
     const [ cameraBtn, setCameraBtn ] = useState('camera')
@@ -50,10 +50,11 @@ function Profile() {
         }
     }
 
+    
     const cameraClick = () => {
         setModal(true)
     }
-
+    
     const inputChange = e => {
         const reader = new FileReader()
         reader.readAsDataURL(e.target.files[0])
@@ -61,21 +62,22 @@ function Profile() {
             setImg(reader.result);
         } 
     }
+    const setOption = useEditDelete()
+    const [ editModal, setEditModal ] = useState(false)
+    const [ id, setId ] = useState('')
 
     const deleteBtn = e => {
-        fetch(`http://localhost:4300/posts`, {
-            method: 'delete',
-            headers: {
-                "Content-Type": "application/json",
-                'authorization': `${token}`
-            },
-            body: JSON.stringify({
-                postId: e.target.id
-            })
+        setOption({
+            method: "delete",
+            id: e.target.id,
+            token: token
         })
-        .then(res => res.json())
-        .catch(e => console.log(e))
         window.location = window.location.href
+    }
+
+    const editBtn = e => {
+        setEditModal(true)
+        setId(e.target.id)
     }
 
     let imgSrc = user.length ? (user[0].user_avatar ? 
@@ -146,6 +148,30 @@ function Profile() {
                             <button className={deleteBtnClick + ' btn'} id={p.post_uid} onClick={deleteBtn}>
                                 <Bin />
                             </button>
+                            <button className={deleteBtnClick + ' btn edit-btn'} id={p.post_uid} onClick={editBtn}>
+                                <Bin />
+                            </button>
+                            {editModal ? 
+                                <div className="upload-form-wrapper" onClick={e=> e.target.classList.value ===
+                                    'upload-form-wrapper' ?
+                                    setEditModal(false) : ''}
+                                    >
+                                    <form action="http://localhost:4300/updatePost" method='POST'
+                                        encType="multipart/form-data" className="upload-form">
+                                        <div className="img_wrapper">
+                                            <img className="form-sub-img" src={img} alt="" />
+                                        </div>
+                                        <div className="input_wrapper">
+                                            <input type="hidden" name="authorization" value={token} />
+                                            <input type="hidden" name="postId" value={id} />
+                                            <input type="text" className='input' name='postTitle' />
+                                            <input type="file" className="file" name="postImage"
+                                                onChange={inputChange} />
+                                            <button type="submit" className="form-sub-btn">submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            : ''}
                         </li>
                         )
                         })

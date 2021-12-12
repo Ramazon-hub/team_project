@@ -14,6 +14,7 @@ function ReanderPosts(setter) {
         })
         .then(res => res.json())
         .then(data => setPost(data))
+        .catch(err => console.log(err))
     }, [token])
 
     return (
