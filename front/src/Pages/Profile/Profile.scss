@@ -61,7 +61,7 @@
     border: 2px solid #008dce;
     padding: 15px;
     font-size: 1.5rem;
-    color: #555;
+    color: #008dce;
 }
 
 .log-out-btn--active {
@@ -107,8 +107,9 @@
 }
 
 .input_wrapper {
-    width: 400px;
+    width: 100%;
     display: flex;
+    justify-content: center;
     align-items: center;
     font-size: 1.5rem;
 }
@@ -157,10 +158,36 @@
     bottom: 0;
     right: 0;
     border-radius: 50%;
-    img {
-        width: 30px;
-        height: 30px;
+    svg {
+        width: 40px;
+        height: 40px;
     }
+    &:hover {
+        #svg {
+            fill: #fff;
+        }
+    }
+}
+
+.deleteBtn {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+        svg {
+            fill: #fff;
+            stroke: #fff;
+        }
+    }
+}
+
+.deleteBtn--active {
+    display: none;
 }
 
 .camera--active {

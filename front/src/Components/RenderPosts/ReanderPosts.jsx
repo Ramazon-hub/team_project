@@ -14,7 +14,7 @@ function ReanderPosts(setter) {
         })
         .then(res => res.json())
         .then(data => setPost(data))
-    }, [])
+    }, [token])
 
     return (
         <ul className='post_list'>

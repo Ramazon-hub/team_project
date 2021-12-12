@@ -1,7 +1,9 @@
 import useAuthUser from "../../Hooks/useAuthUser";
 import './Profile.scss'
+// Images
 import avatar from '../../Images/avatar.png'
-import camera from '../../Images/camera.png'
+import { Bin, Camera } from "../../Images/images";
+
 import Header from '../../Components/Header/Header'
 import Main from "../../Components/Main/Main";
 import useUser from "../../Hooks/useUser";
@@ -11,14 +13,19 @@ import { useEffect, useState } from "react";
 import useUserPost from "../../Hooks/useUserPosts";
 
 function Profile() {
+    // Token
     const [ setToken ] = useAuth(false)
     const [ token ] = useAuth(true)
+
+    // Class List Add
     const [ logOutBtn, setLogOutBtn ] = useState('log-out-btn')
+    const [ cameraBtn, setCameraBtn ] = useState('camera')
+    const [ deleteBtnClick, setdeleteBtnClick ] = useState('deleteBtn')
+
     const [ accessUser, setAccessUser ] = useState({})
     const authUser = useAuthUser()
     const { email } = useParams()
     const user = useUser(email)
-    const [ cameraBtn, setCameraBtn ] = useState('camera')
     const [ modal, setModal ] = useState(false)
     const [ img, setImg ] = useState('')
     const userPost = useUserPost(user.length ? user[0].user_uid : '')
@@ -30,9 +37,11 @@ function Profile() {
         if (typeof accessUser === 'undefined') {
             setLogOutBtn('log-out-btn--active')
             setCameraBtn('camera--active')
+            setdeleteBtnClick('deleteBtn--active')
         } else {
             setLogOutBtn('log-out-btn')
             setCameraBtn('camera')
+            setdeleteBtnClick('deleteBtn')
         }
     }, [authUser, user, accessUser])
     const logOut = () => {
@@ -51,6 +60,22 @@ function Profile() {
         reader.onload = () => {
             setImg(reader.result);
         } 
+    }
+
+    const deleteBtn = e => {
+        fetch(`http://localhost:4300/posts`, {
+            method: 'delete',
+            headers: {
+                "Content-Type": "application/json",
+                'authorization': `${token}`
+            },
+            body: JSON.stringify({
+                postId: e.target.id
+            })
+        })
+        .then(res => res.json())
+        .catch(e => console.log(e))
+        window.location = window.location.href
     }
 
     let imgSrc = user.length ? (user[0].user_avatar ? 
@@ -72,7 +97,7 @@ function Profile() {
                     <div className="profile">
                         <div className='avatar' style={styleFile} >
                             <button className={`${cameraBtn} btn`} onClick={cameraClick}>
-                                <img src={camera} alt="img" />
+                                <Camera />
                             </button>
                         </div>                        
                         <div className="profile-name_wrapper">
@@ -118,6 +143,9 @@ function Profile() {
                             <img className='post_img' src={'http://localhost:4300/post/' + p.post_img} alt="img" />
                             <div className="logo-img-post" style={styleFile} />
                             <small className="post-date">{p.post_date}</small>
+                            <button className={deleteBtnClick + ' btn'} id={p.post_uid} onClick={deleteBtn}>
+                                <Bin />
+                            </button>
                         </li>
                         )
                         })

@@ -36,9 +36,10 @@ module.exports = {
   DELETE: async (req, res) => {
     try {
       const { postId } = req.body;
-      const deletePost = await model.deletePost(postId);
-      if (deletePost) {
-        res.status(200).json(deletePost);
+      const user = await model.userPost(req.user.user_uid)
+      if (postId && user.length) {
+        await model.deletePost(postId)
+        res.end()
       } else {
         res.status(200).json({ meassage: "Not delete" });
       }
